@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './scss/style.scss'
 
 const loading = (
@@ -19,7 +19,7 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <React.Suspense fallback={loading}>
         <Switch>
           <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} />
@@ -34,7 +34,7 @@ const App = () => {
           <Route path="/" name="Home" render={(props) => <DefaultLayout {...props} />} />
         </Switch>
       </React.Suspense>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
