@@ -8,22 +8,23 @@ const DefaultLayout = () => {
   const history = useHistory()
   const [loading, setLoading] = useState(true)
 
-  const checkLogin = async () => {
-    if (api.getToken()) {
-      const response = await api.validateToken()
-      if (response.error === '') {
-        setLoading(false)
+  useEffect(() => {
+    const checkLogin = async () => {
+      if (api.getToken()) {
+        const response = await api.validateToken()
+        if (response.error === '') {
+          setLoading(false)
+          history.push('/')
+        } else {
+          alert(response.error)
+          history.push('/login')
+        }
       } else {
-        alert(response.error)
         history.push('/login')
       }
-    } else {
-      history.push('/login')
     }
-  }
-
-  useEffect(() => {
     checkLogin()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>

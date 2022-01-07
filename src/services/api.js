@@ -1,12 +1,12 @@
-const baseUrl = 'https//:api.b7web.com.br/devcond/api/admin'
+const baseUrl = 'https://api.b7web.com.br/devcond/api/admin'
 
 const request = async (method, endpoint, params, token = null) => {
   method = method.toLowerCase()
-  const fullUrl = `${baseUrl}${endpoint}`
-  const body = null
+  let fullUrl = `${baseUrl}${endpoint}`
+  let body = null
   switch (method) {
     case 'get':
-      const queryString = new URLSearchParams(params).toString()
+      let queryString = new URLSearchParams(params).toString()
       fullUrl += `?${queryString}`
       break
     case 'post':
@@ -22,15 +22,15 @@ const request = async (method, endpoint, params, token = null) => {
       break
   }
 
-  const headers = { 'Content-Type': 'application/json' }
+  let headers = { 'Content-Type': 'application/json' }
 
   if (token) {
     headers.Authorization = `Bearer ${token}`
   }
 
-  const req = await fetch(fullUrl, { method, headers, body })
+  let req = await fetch(fullUrl, { method, headers, body })
 
-  const response = await req.json()
+  let response = await req.json()
 
   return response
 }
